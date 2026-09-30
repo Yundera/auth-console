@@ -1,0 +1,43 @@
+/*
+ * Design tokens — the PANELS half of Maison's web/src/styles/tokens.css, so the
+ * console reads as part of the same product. Maison's DESKTOP (glass over a
+ * wallpaper) tokens are deliberately not carried over: every console screen is
+ * a page. Name the role, not the colour.
+ */
+:root {
+  --blue: hsla(208, 100%, 45%, 1);
+  --green: hsla(118, 70%, 38%, 1);
+  --orange: hsl(28, 95%, 48%);
+  --red: hsl(348, 90%, 52%);
+  --primary: hsl(216, 90%, 54%);
+
+  --surface: #fff;
+  --surface-2: hsla(208, 16%, 96%, 1);
+  --surface-3: hsla(208, 16%, 92%, 1);
+  --surface-sunken: hsla(208, 18%, 97%, 1);
+  --page: hsla(208, 20%, 94%, 1);
+
+  --border: hsla(208, 16%, 88%, 1);
+  --border-strong: hsla(208, 16%, 78%, 1);
+
+  --text: hsla(208, 24%, 18%, 1);
+  --text-muted: hsla(208, 14%, 44%, 1);
+  --text-subtle: hsla(208, 12%, 58%, 1);
+  --text-on-accent: #fff;
+
+  --ok-bg: hsla(118, 50%, 92%, 1);
+  --ok-fg: hsla(118, 60%, 26%, 1);
+  --warn-bg: hsla(40, 95%, 90%, 1);
+  --warn-fg: hsla(30, 85%, 30%, 1);
+  --bad-bg: hsla(348, 90%, 94%, 1);
+  --bad-fg: hsla(348, 70%, 38%, 1);
+  --info-bg: hsla(216, 90%, 94%, 1);
+  --info-fg: hsla(216, 70%, 36%, 1);
+
+  --radius-card: 10px;
+  --radius-pill: 999px;
+
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", "Noto Sans", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-base: 0.875rem;
+}

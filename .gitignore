@@ -1,0 +1,19 @@
+# Go
+/auth-console
+*.test
+*.out
+
+# Frontend
+web/node_modules/
+
+# Embedded build output (produced by `vite build`). The placeholder index.html
+# is tracked so `go build` / `go test` work before the UI has been built.
+/internal/ui/dist/*
+!/internal/ui/dist/index.html
+
+# Local dev fixtures
+/dev/host-root/
+
+.DS_Store
+*.log
+CLAUDE.md
