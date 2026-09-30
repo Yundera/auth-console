@@ -17,7 +17,7 @@ See [architecture.md](./architecture.md) for the design and
 |---|---|---|---|
 | **Account** | every signed-in user | Name, username, email, role; link to Authelia's portal (`local-auth-${DOMAIN}`) for password change, reset-by-email and TOTP | Sign out |
 | **Account › Local accounts** | admins | Authelia users: username, display name, email, role, owner / disabled | Add user (one-time password), change email, reset password (one-time password), revoke. Revoke and reset end the user's sessions on this console |
-| **Account › Onboarding** | admins, Yundera only | Claimed / unclaimed, owner name | — (reset is terminal-only: `onboarding.sh reset --confirm`) |
+| **Account › Onboarding** | admins, Yundera only | Claimed / unclaimed, owner name | — ("Re-run onboarding" lives in the admin app, next to the wizard) |
 | **Access** | admins | Host Linux accounts, their `authorized_keys` (tagged admin app / support / user / unknown), last 50 logins | Add a key (paste, or generate an Ed25519 pair in the browser — the private key never leaves it), remove a key, consent screen for `/access?account=&pubkey=` / `&pubkeyUrl=` deep links |
 | **Access › Support access** | admins, Yundera only | Intended vs actual state of the operator's support key | Enable / disable (with a lockout warning) |
 

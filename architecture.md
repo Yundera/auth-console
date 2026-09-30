@@ -160,12 +160,12 @@ Yundera support key.
 
 ## 9. Relationship to other services
 
-- **settings-center-app.** Account shrinks to "who you are" plus links to the Auth Console
-  and the sign-in portal; Access and the `/api/admin/users-*`, `access-*`,
-  `onboarding-reset` routes are gone. A `#/access?…` hash is forwarded to
-  `auth-console-<domain>/access`, so pcs-orchestrator's support deeplink keeps working.
-  The onboarding wizard stays there (it runs before any local account exists, through
-  Yundera Login).
+- **settings-center-app.** The Account and Access panels and the `/api/admin/users-*` and
+  `access-*` routes are gone; `#/access?…` and `#/account` hashes are forwarded to the
+  console, so pcs-orchestrator's support deeplink keeps working. Onboarding stays there:
+  the wizard (it runs before any local account exists, through Yundera Login) and
+  "Re-run onboarding" on System Information, which unclaims the box — the console only
+  shows the status.
 - **mesh-console.** Unchanged, still behind `OIDC_REQUIRED_GROUPS=admins`.
 - **Maison.** The `auth` stack's tile (`x-compose-app`, `view: system`) opens the console.
 - **pcs-orchestrator (Yundera only).** Read: `GET ${OPERATOR_API}/support/ssh-key`.

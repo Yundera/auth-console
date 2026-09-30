@@ -14,7 +14,7 @@ Account/Access removed from settings-center-app. Nothing committed or published 
 | Scripts stay in the templates | 2026-09-30 | The runner calls `authelia-user-manager.sh` & co. in each template's `scripts/`; not Maison `pre_up` hooks (template-deployed stacks don't run them, and a failing hook blocks every start of the stack that is login) |
 | Revocation covers this gate only | 2026-09-30 | Accepted v1 gap, see architecture.md §7.3. Fix in AppShield before multi-account |
 | Password self-service stays in Authelia's portal | 2026-09-30 | The console never handles a user's own password |
-| Onboarding reset is terminal-only | 2026-09-30 | Dropped from settings-center-app too; the console shows status only |
+| "Re-run onboarding" lives in the admin app, not the console | 2026-09-30 | Revised the same day from "terminal-only": it sits next to the wizard it replays (settings-center-app, System Information), refuses while Yundera Login is off, and revokes the other admin gate sessions. The console shows onboarding status only |
 | Access ships on FOSS too | 2026-09-30 | Same guards; support access is Yundera-only |
 
 ## Code map
@@ -69,16 +69,18 @@ host action → 502; runner busy → 409; key scripts' exit 2 / 3 / 4 → 404 / 
   covers the body, and 100.64/10 and 198.18/15 are blocked.
 - **Key-file hardening.** Symlinked `~/.ssh` / `authorized_keys` refused; a missing final
   newline no longer glues the new key onto the previous one.
-- **Web onboarding reset** removed (terminal-only, and it never revoked sessions).
+- **Web onboarding reset** moved to the admin app's System Information panel, now guarded (Yundera Login must be on) and revoking the other admin gate sessions — it used to revoke none.
 
 ## settings-center-app changes (same rollout)
 
-- Deleted: `panels/access/`, `pages/api/admin/{users-*,access-*,onboarding-reset}.ts`,
-  `backend/server/Users/AutheliaUsers.ts`, `backend/auth/gateControl.ts`, and the helpers
-  only they used (`gateSessionId`, `getContainerKeyFingerprint`,
-  `trustedPubkeyHostSuffixes`, `resetOnboarding`, the `APPSHIELD_GATE_URL` config key).
-- `AccountPanel` is now "who you are" + links to the Auth Console and the sign-in portal.
-- `App.tsx` forwards `#/access?…` to `auth-console-<domain>/access?…`, so
+- Deleted (1.4.8): `panels/access/`, `pages/api/admin/{users-*,access-*}.ts`,
+  `backend/server/Users/AutheliaUsers.ts`, and the helpers only they used
+  (`getContainerKeyFingerprint`, `trustedPubkeyHostSuffixes`).
+- Deleted (after 1.4.8): the Account panel itself. "Re-run onboarding" came back as a
+  System Information card (`component/RerunOnboarding.tsx`, `onboarding-reset.ts`, with
+  `gateControl.ts` / `gateSessionId` / `APPSHIELD_GATE_URL` restored for its revocation).
+- `App.tsx` forwards `#/access?…` to `auth-console-<domain>/access?…` and `#/account` to
+  the console's Account page, so
   pcs-orchestrator's `buildSupportDeeplink` (`pcsAPI.ts`) keeps working without a change.
   Pointing the orchestrator at auth-console directly can wait until no box runs a
   template without the console.

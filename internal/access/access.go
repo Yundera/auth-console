@@ -209,12 +209,22 @@ func parseFP(line string) *fpEntry {
 	return e
 }
 
+// keyTypeRe recognises the key-type token, so a line with an options prefix
+// (`from="127.0.0.1",no-pty ssh-ed25519 AAAA… comment`) parses to the key and
+// its comment, not to the options. settings-center-app took field 0 as the type.
+var keyTypeRe = regexp.MustCompile(`^(ssh-(rsa|dss|ed25519)(-cert-v01@openssh\.com)?|ecdsa-sha2-nistp(256|384|521)|sk-(ssh-ed25519|ecdsa-sha2-nistp256)@openssh\.com)$`)
+
 func parseRaw(line string) *rawEntry {
 	t := strings.TrimSpace(line)
 	if t == "" || strings.HasPrefix(t, "#") {
 		return nil
 	}
 	p := strings.Fields(t)
+	for i := 0; i+1 < len(p); i++ {
+		if keyTypeRe.MatchString(p[i]) {
+			return &rawEntry{typ: p[i], comment: strings.Join(p[i+2:], " ")}
+		}
+	}
 	if len(p) < 2 {
 		return nil
 	}

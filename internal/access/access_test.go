@@ -23,7 +23,7 @@ FP_START
 3072 SHA256:CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC user-alice laptop (RSA)
 FP_END
 RAW_START
-ssh-ed25519 AAAA local-admin-access
+from="127.0.0.1,::1",no-agent-forwarding ssh-ed25519 AAAA local-admin-access
 # a comment
 ssh-ed25519 BBBB pcs-support
 ssh-rsa CCCC user-alice laptop
@@ -66,7 +66,8 @@ func TestParse(t *testing.T) {
 	if len(keys) != 3 {
 		t.Fatalf("keys = %+v", keys)
 	}
-	if !keys[0].IsAdminKey || keys[0].IsUserKey || keys[0].IsSupport {
+	// The first line carries an options prefix: the comment must still be found.
+	if !keys[0].IsAdminKey || keys[0].IsUserKey || keys[0].IsSupport || keys[0].Comment != "local-admin-access" {
 		t.Errorf("admin key tags = %+v", keys[0])
 	}
 	if !keys[1].IsSupport {
