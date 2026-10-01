@@ -31,7 +31,7 @@ before the stack split).
 | `auth-console-app` | `ghcr.io/yundera/auth-console` | `pcs` | — (`expose: 8080` only) | UI + API. Docker socket, platform root read-only |
 | `auth-console-runner` | same image as the app | host namespaces | — | Not a compose service: created per host action, outside any project |
 
-The internal gRPC network (`dex-internal` on mesh, `yundera-auth` on Yundera) holds only
+The internal gRPC network (`dex-internal` on both templates; Yundera called it `yundera-auth` until 2026-10-01) holds only
 Dex's unauthenticated client API and the registrar; it must never be reachable from `pcs`.
 
 ## 3. Where it runs
