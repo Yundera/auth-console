@@ -5,7 +5,7 @@ who can reach the host. It is the web UI of the **`auth` stack** — Dex, Authel
 auth-registrar — and replaces the **Account** and **Access** panels of
 `settings-center-app` (the Yundera admin app).
 
-Served at `auth-console-${DOMAIN}` (plus the `nip.io` / `sslip.io` variants), behind an
+Served at `auth-console-${DOMAIN}` (plus the `${IP_ZONE}` / `sslip.io` variants), behind an
 AppShield gate. The **Auth** tile in Maison opens it.
 
 See [architecture.md](./architecture.md) for the design and
