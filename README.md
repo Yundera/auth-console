@@ -8,8 +8,7 @@ auth-registrar — and replaces the **Account** and **Access** panels of
 Served at `auth-console-${DOMAIN}` (plus the `${IP_ZONE}` / `sslip.io` variants), behind an
 AppShield gate. The **Auth** tile in Maison opens it.
 
-See [architecture.md](./architecture.md) for the design and
-[implementation_note.md](./implementation_note.md) for decisions, rollout and known gaps.
+See [architecture.md](./architecture.md) for the design.
 
 ## Pages
 
